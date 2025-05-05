@@ -1,7 +1,7 @@
 {
   "name": "@kerim-keskin/react-input-mask",
   "description": "Masked input component for React (supports react 19)",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "homepage": "https://github.com/kerimkeskin/react-input-mask",
   "license": "MIT",
   "author": "Kerim Keskin (@kerimkeskin)",
@@ -86,7 +86,7 @@
     "clean": "rimraf lib dist",
     "build": "cross-env BABEL_ENV=rollup rollup -c",
     "start": "cross-env BABEL_ENV=test NODE_ENV=development webpack-dev-server",
-    "prepare": "npm run lint && npm test && npm run clean && npm run build",
+    "prepare": "npm run lint && npm test && npm run clean && tsc && npm run build",
     "lint": "eslint ./src ./tests ./*.js",
     "lint-fix": "eslint --fix ./src ./tests ./*.js",
     "test": "npm run build && npm run test:input && npm run test:server-render && npm run test:build",
