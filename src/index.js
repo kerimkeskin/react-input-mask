@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
 
 import {
   useInputState,
@@ -302,23 +301,6 @@ InputMask.displayName = "InputMask";
 InputMask.defaultProps = {
   alwaysShowMask: false,
   maskPlaceholder: "_"
-};
-
-InputMask.propTypes = {
-  alwaysShowMask: PropTypes.bool,
-  beforeMaskedStateChange: PropTypes.func,
-  children: PropTypes.element,
-  mask: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(RegExp)])
-    )
-  ]),
-  maskPlaceholder: PropTypes.string,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onMouseDown: PropTypes.func
 };
 
 export default InputMask;
