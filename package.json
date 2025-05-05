@@ -1,10 +1,10 @@
 {
-  "name": "react-input-mask",
-  "description": "Masked input component for React",
-  "version": "3.0.0-alpha.2",
-  "homepage": "https://github.com/sanniassin/react-input-mask",
+  "name": "@kerim-keskin/react-input-mask",
+  "description": "Masked input component for React (supports react 19)",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kerimkeskin/react-input-mask",
   "license": "MIT",
-  "author": "Nikita Lobachev <sanniassin@gmail.com>",
+  "author": "Kerim Keskin (@kerimkeskin)",
   "keywords": [
     "react",
     "input",
