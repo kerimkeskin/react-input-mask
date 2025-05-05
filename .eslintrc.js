@@ -1,9 +1,9 @@
 const OFF = 0;
-const WARN = 1;
+// const WARN = 1;
 const ERROR = 2;
 
 module.exports = {
-  parser: "babel-eslint",
+  parser: "@babel/eslint-parser",
   parserOptions: {
     ecmaVersion: 2018,
   },
@@ -32,6 +32,6 @@ module.exports = {
       },
     ],
     "prettier/prettier": ERROR,
-    "react/prop-types": OFF,
+    "no-nonoctal-decimal-escape": OFF,
   },
 };
