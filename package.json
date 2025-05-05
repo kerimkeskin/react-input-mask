@@ -97,6 +97,7 @@
   "dependencies": {
     "invariant": "^2.2.4",
     "prop-types": "^15.7.2",
+    "typescript": "^5.8.3",
     "warning": "^4.0.3"
   }
 }
