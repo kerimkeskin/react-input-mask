@@ -1,8 +1,10 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
-    "noEmit": true,
-    "skipLibCheck": true,
-    "outDir": "dist"
+    "declarationMap": true,
+    "allowJs": true,
+    "declaration": true,
+    "outDir": "dist",
+    "emitDeclarationOnly": true
   }
 }
