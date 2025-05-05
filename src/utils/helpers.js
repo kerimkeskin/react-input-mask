@@ -2,6 +2,10 @@
 // if element rendered within iframe.
 // See https://github.com/sanniassin/react-input-mask/issues/182
 export function getElementDocument(element) {
+  if (!element?.ownerDocument) {
+    return null;
+  }
+
   return element?.ownerDocument;
 }
 

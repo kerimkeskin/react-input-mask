@@ -8,6 +8,9 @@ import {
 } from "./utils/input";
 import { isDOMElement } from "./utils/helpers";
 
+export const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function useInputElement(inputRef) {
   return useCallback(() => {
     let input = inputRef.current;
@@ -74,6 +77,11 @@ function useSelection(inputRef, isMasked) {
 
   const getSelection = useCallback(() => {
     const input = getInputElement();
+
+    if (!input) {
+      return selectionRef.current;
+    }
+
     return getInputSelection(input);
   }, [getInputElement]);
 
@@ -104,12 +112,15 @@ function useSelection(inputRef, isMasked) {
   }, [getSelection]);
   const [runSelectionLoop, stopSelectionLoop] = useDeferLoop(selectionLoop);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!isMasked) {
       return;
     }
 
     const input = getInputElement();
+
+    if (!input) return;
+
     input.addEventListener("focus", runSelectionLoop);
     input.addEventListener("blur", stopSelectionLoop);
 
@@ -134,6 +145,9 @@ function useValue(inputRef, initialValue) {
 
   const getValue = useCallback(() => {
     const input = getInputElement();
+
+    if (!input) return;
+
     return input.value;
   }, [getInputElement]);
 
@@ -146,9 +160,12 @@ function useValue(inputRef, initialValue) {
       valueRef.current = newValue;
 
       const input = getInputElement();
-      if (input) {
-        input.value = newValue;
+
+      if (!input) {
+        return;
       }
+
+      input.value = newValue;
     },
     [getInputElement]
   );

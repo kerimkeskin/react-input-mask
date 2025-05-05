@@ -1,8 +1,13 @@
-import React, { useLayoutEffect, forwardRef } from "react";
-import { findDOMNode } from "react-dom";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 
-import { useInputState, useInputElement, usePrevious } from "./hooks";
+import {
+  useInputState,
+  useInputElement,
+  usePrevious,
+  useIsomorphicLayoutEffect
+} from "./hooks";
+
 import {
   validateMaxLength,
   validateChildren,
@@ -214,7 +219,7 @@ const InputMask = forwardRef(function InputMask(props, forwardedRef) {
   const lastSelection = lastState.selection;
   const lastValue = lastState.value;
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!isMasked) {
       return;
     }
@@ -267,13 +272,13 @@ const InputMask = forwardRef(function InputMask(props, forwardedRef) {
     onBlur,
     onChange: isMasked && isEditable ? onChange : props.onChange,
     onMouseDown: isMasked && isEditable ? onMouseDown : props.onMouseDown,
-    ref: ref => {
-      inputRef.current = findDOMNode(ref);
+    ref: node => {
+      inputRef.current = node;
 
       if (isFunction(forwardedRef)) {
-        forwardedRef(ref);
+        forwardedRef(node);
       } else if (forwardedRef !== null && typeof forwardedRef === "object") {
-        forwardedRef.current = ref;
+        forwardedRef.current = node;
       }
     },
     value: isMasked && isControlled ? lastValue : props.value
@@ -282,9 +287,11 @@ const InputMask = forwardRef(function InputMask(props, forwardedRef) {
   if (children) {
     validateChildren(props, children);
 
-    // We wrap children into a class component to be able to find
-    // their input element using findDOMNode
-    return <ChildrenWrapper {...inputProps}>{children}</ChildrenWrapper>;
+    return (
+      <ChildrenWrapper {...inputProps} ref={inputProps.ref}>
+        {children}
+      </ChildrenWrapper>
+    );
   }
 
   return <input {...inputProps} />;
